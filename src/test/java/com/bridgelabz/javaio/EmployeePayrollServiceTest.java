@@ -10,17 +10,22 @@ public class EmployeePayrollServiceTest {
 
 	@Test
 	public void given3Employees_WhenWrittenToFile_ShouldMatchTotalEntries() {
-		EmployeePayrollData[] arrayOfEmployee= {
-				new EmployeePayrollData(1, "Sampada", 10000.0),
-				new EmployeePayrollData(2, "Sid", 20000.0),
-				new EmployeePayrollData(3, "V", 30000.0)
-		};
+		EmployeePayrollData[] arrayOfEmployee = { new EmployeePayrollData(1, "Sampada", 10000.0),
+				new EmployeePayrollData(2, "Sid", 20000.0), new EmployeePayrollData(3, "V", 30000.0) };
 		EmployeePayrollService employeePayrollService;
 		employeePayrollService = new EmployeePayrollService(Arrays.asList(arrayOfEmployee));
 		employeePayrollService.writeEmployeePayrollData(EmployeePayrollService.IOService.FILE_IO);
 		employeePayrollService.printData(EmployeePayrollService.IOService.FILE_IO);
-		long entries=employeePayrollService.countEntries(EmployeePayrollService.IOService.FILE_IO);
-		assertEquals(3,entries);
+		long entries = employeePayrollService.countEntries(EmployeePayrollService.IOService.FILE_IO);
+		assertEquals(3, entries);
+	}
+
+	@Test
+	public void givenFile_WhenReadFromFile_ShouldReturnEmployeeCount() {
+		EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+		System.out.println("After reading from file :");
+		int entries = employeePayrollService.readEmployeePayrollData(EmployeePayrollService.IOService.FILE_IO);
+		assertEquals(3, entries);
 	}
 
 }
